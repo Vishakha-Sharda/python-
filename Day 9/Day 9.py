@@ -1,4 +1,24 @@
 from tkinter import*
+import tkinter
+from mysql import connector
+from tkinter import messagebox 
+def database():
+    conn=connector.connect(
+        user='root',
+        password='Password',
+        host='127.0.0.1',
+        port='3306',
+        database='college')
+    mycursor=conn.cursor()
+    sr_no=entry_1.get()
+    name=entry_2.get()
+    roll_no=entry_3.get()
+    address=entry_4.get()
+    branch=label_5.get()
+    gender=var.get()
+    mycursor.execute("insert into college values(%s,%s,%s,%s,%s,%s)",(sr_no,name,roll_no,address,branch,gender))
+    messagebox.showinfo("Info","Submitted")
+    conn.commit()
 root = Tk()
 root.geometry('500x500')
 root.title("Registration Form")
@@ -33,12 +53,12 @@ entry_4.place(x=240,y=280)
 
 label_5 = Label(root, text="Branch",width=20,font=("bold", 10))
 label_5.place(x=70,y=330)
-lable_5= StringVar(root)
-lable_5.set("Select one") 
+label_5= StringVar(root)
+label_5.set("Select one") 
 
-dd= OptionMenu(root,lable_5,"CSE","IT","ECE","ME","EE")
-dd.pack()
-dd.place(x=210,y=325)
+entry_5= OptionMenu(root,label_5,"CSE","IT","ECE","ME","EE")
+entry_5.pack()
+entry_5.place(x=210,y=325)
 
 l_6 = Label(root,text="Gender:",width=20,font=("bold", 10))
 l_6.place(x=75,y=380)
@@ -46,13 +66,13 @@ var = IntVar()
 Radiobutton(root,text="Male",padx = 5, variable=var, value=1).place(x=200,y=380)
 Radiobutton(root,text="Female",padx = 20, variable=var, value=2).place(x=270,y=380)
 
-Button(root,text='Submit',width=20,bg='brown',fg='white').place(x=180,y=440)
+Button(root,text='Submit',width=20,bg='brown',fg='white',command=database).place(x=180,y=440)
 root.mainloop()
 
 
 
 
-Button(root, text='Submit',width=20,bg='brown',fg='white').place(x=180,y=380)
+
 # it is use for display the registration form on the window
 root.mainloop()
-print("registration form  seccussfully created...")
+print("registration form  successfully created...")

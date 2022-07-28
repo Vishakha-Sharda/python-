@@ -1,3 +1,4 @@
+
 # example 1
 from abc import ABC,abstractmethod
 class student(ABC):
@@ -40,4 +41,4 @@ r.mileage()
 s = Suzuki()   
 s.mileage()   
 d = Duster()   
-d.mileage()  
+d.mileage()
